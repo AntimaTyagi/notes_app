@@ -1,0 +1,20 @@
+{% extends "base.html" %} 
+{% block content %}
+<div class="bg-white d-flex card justify-content-center align-items-center p-5 m-5" >
+<h1 class="p-5">Note Description</h1>
+    
+        <h5><b>Title : </b> {{object.title }} </h5>
+        <h5><b>Text : </b>{{object.text }} </h5>
+        <h5><b>Created_Date : </b>{{object.created_date }} </h5>  
+        <h5><b>Updated: </b>{{object.updated_at }} </h5>        
+        {% if object.image %}
+        <img src="{{object.image.url}}" alt="{{object.title }}" width="300px">         
+        {% endif %}
+{% comment %}         
+        <h5>User_id:{{object.user_id }} </h5>     {% endcomment %}
+        <div class="d-grid gap-2 d-md-block mt-5">
+  <a href="/notes/updatenote/{{object.id}}" class="btn  btn-primary px-4 mx-2" type="button">Edit</a>
+  <a href="/notes/deletenote/{{object.id}}" class="btn btn-primary px-4" type="button">Delete</a>
+</div>
+</div>
+{% endblock %}

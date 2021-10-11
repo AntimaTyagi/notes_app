@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class=" card align-items-center justify-content-centerm-5 p-5 m-5 d-flex">
+  <h2><b>Welcome Back </b><span class="text-primary">{{user.username}}</span>  !</h2>
+  <h4 class="p-4">Create Notes! Click <a class="" href="{% url 'notes:createnote' %}">here</a> </h4>
+{% comment %}     
+  <div class="d-flex ">
+    {%for notes in object_list%}
+    
+       <div class="card text-dark p-5 ">
+          <div class="card-body">
+            <h4 class="card-text p-5">{{notes.title}}</h4>
+            <a href="/notes/{{notes.id}}" class="card-link p-5">Details</a>
+          </div>
+        </div>
+
+    {% endfor %}
+  </div>
+   {% endcomment %}
+
+<section class="wrapper">
+    <div class="container-fostrap">       
+            <div class="container">
+                <div class="row">
+
+                {%for notes in object_list%}
+                    <div class="col-xs-12 col-sm-4">
+                        <div class="card">
+                            <a class="img-card" href="/notes/{{notes.id}}">
+                             {% if notes.image %}
+                                <img src="{{notes.image.url}}" alt="{{object.title }}" >
+                                {% else %}
+                                <img src="https://1.bp.blogspot.com/-Bii3S69BdjQ/VtdOpIi4aoI/AAAAAAAABlk/F0z23Yr59f0/s640/cover.jpg" />         
+                              {% endif %}
+                            </a>
+                            <div class="card-content">
+                                <h4 class="card-title">
+                                    <a href="/notes/{{notes.id}}"> {{notes.title}}
+                                  </a>
+                                </h4>
+                                <p class="">
+                                    {{notes.text}}
+                                </p>
+                            </div>
+                            <div class="card-read-more">
+                                <a href="/notes/{{notes.id}}" class="btn btn-link btn-block">
+                                    Read More
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                   
+                   {% endfor %} 
+                </div>
+            </div>
+        </div>
+   
+</section>
+
+  <nav aria-label="Pagination" class="pt-5">
+  <ul class="pagination">
+    <li class="page-item">
+      {% if page_obj.number == 1 %}
+        {% else %}
+    <li class="page-item"><a class="page-link active sr-only" href="?page={{ page_obj.number|add:-1 }}">Previous</a></li>
+        {% endif %}
+          {% for i in page_obj.paginator.page_range %}
+              {% if page_obj.number == i %}
+                <li class="page-item active" aria-current="page">               
+                  <span class="page-link">({{ i }})<span class="sr-only"></span></span>                       
+                </li>
+              {% elif i > page_obj.number|add:'-5' and i < page_obj.number|add:'5' %}           
+                <li class="page-item">
+                  <a class="page-link" href="?page={{ i }}{{ query_string }}">{{ i }}</a>
+                </li>
+
+              {% endif %}
+          {% endfor %}
+      {% if page_obj.number == page_obj.paginator.num_pages %}
+      {% else %}
+    <li class="page-item"><a class="page-link" href="?page={{ page_obj.number|add:1 }}">Next</a></li>
+  {% endif %}
+  </ul>
+  </nav>
+
+</div>
+
+
+{% endblock content %}

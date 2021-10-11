@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block content %}
+<script src=
+"https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js">
+        </script>
+<div class="card justify-content-center align-items-center p-5 ">
+{% if object %}
+<h3 class="p-3">Edit Note</h3>
+{% else %}
+<h3 class="p-3">Create Note</h3>
+{% endif %}
+<form action="" method="POST" enctype='multipart/form-data'>
+{% csrf_token %}
+{% comment %} {{form.as_p}} {% endcomment %}
+<div class="mb-3">
+  <label for="title" class="form-label">Title</label>
+  <input type="text" name="title" class="form-control" id="title" placeholder="Note Title" value="{{object.title}}" >
+</div>
+<div class="mb-3">
+  <label for="text" class="form-label">Text</label>
+  <textarea class="form-control" name="text" id="text" placeholder="Note Text" rows="6" >{{object.text}}</textarea>
+</div>
+<div>
+{% if object.image %}
+{{object.image.url}}
+
+
+{% endif %}
+</div>
+<div class="mb-3">
+  <label for="photo" class="form-label">Image</label>
+  <input name="image" class="form-control" type="file" id="photo" />
+</div>
+<button type="submit">Submit</button>
+</form>
+
+</div>
+
+
+
+{% endblock content %}
+
+
