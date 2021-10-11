@@ -1,0 +1,35 @@
+{% extends 'base.html' %} {% block content %}
+<div class="card justify-content-center align-items-center p-5 m-5 d-flex">
+ 
+  {% comment %}
+  <form action="" method="POST">{% csrf_token %} {{form.as_p}}</form>
+  {% endcomment %}
+  <div class="w-50 card justify-content-center align-items-center p-5 m-5">
+    <h3 class="p-5">Login</h3>
+    <form class="w-100" name="LoginForm" action="" method="post">
+     {% csrf_token %}
+      <div class="mb-3">
+        <label for="username" class="form-label">User name</label>
+        <input
+          type="text"
+          class="form-control"
+          id="username"
+          name="username"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="Password1" class="form-label">Password</label>
+        <input
+          type="password"
+          class="form-control"
+          id="password"
+          name="password"
+        />
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+</div>
+
+{% endblock content %}
+

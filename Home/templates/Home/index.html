@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="">
+
+<div class="card justify-content-center align-items-center m-5">
+  <div class="card-body p-5 text-center">
+    {% if user.is_authenticated  %}
+    <h2 class="p-4">Welcome  {{user.username}}!</h2>
+    
+    <h5 class="p-4">Create Notes! Click <a class="" href="{% url 'notes:createnote' %}">here</a> </h5>
+    <h5 class="p-4">View Your Notes.Click <a href="{% url 'notes:welcomenote' %}">here</a> </h5>
+  
+    {% else %}
+    <h2 class="p-4">Welcome to <a href="#">Notes!</a></h2>
+    
+    <h5 class="p-4">Become a member today! Click <a class="" href="{% url 'account:register' %}">here</a> to register</h5>
+    <h5 class="p-4">If you are already a reigtered members .Click <a href="{% url 'account:login' %}">here</a> to sign in</h5>
+  
+    {% endif %}
+    
+  </div>
+</div>
+
+<div class="p-5 d-flex justify-content-center align-items-center">
+<a type="button" href="/" class="btn btn-outline-light">Home</a>
+<a type="button" href="{% url 'account:login' %}" class="btn btn-outline-light mx-4">Sign In</a>
+<a type="button" href="{% url 'account:register' %}" class="btn btn-outline-light">Register</a>
+</div>
+</div>
+
+
+{% endblock content %}
